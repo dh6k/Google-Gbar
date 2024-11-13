@@ -1684,4 +1684,4 @@ loadConfig();
 
 placeGBar();
 
-GM_registerMenuCommand("Configure GBar", changeConfig);
+GM_registerMenuCommand("Configure Gbar", changeConfig);
