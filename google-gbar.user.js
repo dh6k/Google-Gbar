@@ -20,15 +20,6 @@ let userEmail;
 let userName;
 let userPicture;
 
-if (document.querySelector("[href^='https://accounts.google.com/SignOutOptions']")) {
-  const infoElement = document.querySelector("[href^='https://accounts.google.com/SignOutOptions']");
-
-  userInfo = (infoElement.ariaLabel ?? infoElement.title).replace(/\n|\(|\)/g, "").split(" ");
-  userEmail = userInfo[4];
-  userName = userInfo[2];
-  userPicture = infoElement.querySelector("img").src.replace("s32", "s128");
-}
-
 let settingsOpen = false;
 
 // Define Presets
@@ -1077,6 +1068,17 @@ gBarStyle.textContent = `
 }
 `;
 gBar.prepend(gBarStyle);
+
+if (document.querySelector("[href^='https://accounts.google.com/SignOutOptions']")) {
+  const infoElement = document.querySelector("[href^='https://accounts.google.com/SignOutOptions']");
+
+  userInfo = (infoElement.ariaLabel ?? infoElement.title).replace(/\n|\(|\)/g, "").split(" ");
+  userEmail = userInfo[4];
+  userName = userInfo[2];
+  userPicture = infoElement.querySelector("img").src.replace("s32", "s128");
+
+  gBar.style.setProperty("--user-picture", `url(${userPicture})`);
+}
 
 function placeGBar() {
   const gplex = document.getElementById("ugf");
