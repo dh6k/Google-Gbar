@@ -1,4 +1,4 @@
-# <img height="75px" alt="Gbar Logo" src="https://raw.githubusercontent.com/CallyHam/Google-Gbar/refs/heads/main/images/gbar.svg">
+# <img height="75px" alt="Gbar Logo" src="https://github.com/CallyHam/Google-Gbar/blob/main/images/gbar.svg?raw=true">
 
 A highly customizable recreation of the gbar in userscript form.
 
