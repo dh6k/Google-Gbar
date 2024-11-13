@@ -1198,8 +1198,6 @@ function detectLocation(layout, item) {
     }
   });
 
-  console.log(`${layoutArray[item].label}: ${layoutArray[item].score}`);
-
   if (layoutArray[item].score == Infinity) {
     return true;
   } else if (layoutArray[item].score == Math.max(...layoutArray.map((x) => x.score), 0) && layoutArray[item].score != 0) {
