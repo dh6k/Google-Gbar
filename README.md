@@ -9,8 +9,8 @@ A highly customizable recreation of the gbar in userscript form.
   
 ## Configuration
 * Right click an empty space on the web page
-* Hover over "Tampermonkey"
-* Hover over "GBar"
+* Select "Tampermonkey"
+* Select "Google Gbar"
 * Click "Configure Gbar"
 * Change your preset or edit the JSON manually
 * Click the "Apply" button
