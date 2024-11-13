@@ -1211,7 +1211,7 @@ function detectLocation(layout, item) {
 
 async function loadConfig() {
   // Get Config
-  const config = await GM.getValue("config", `{\n  "theme": "2009", \n  "layout": []\n}`);
+  const config = await GM.getValue("config", JSON.stringify(presets[0], null, 2));
   const configJson = JSON.parse(config);
 
   // Reset GBar If Needed
@@ -1624,7 +1624,7 @@ async function changeConfig() {
   `;
 
   const codeElement = gBarSettings.querySelector("#gbar-config-code");
-  codeElement.value = await GM.getValue("config", `{\n  "theme": "2009", \n  "layout": []\n}`);
+  codeElement.value = await GM.getValue("config", JSON.stringify(presets[0], null, 2));
 
   const dropdownElement = gBarSettings.querySelector("#gbar-config-dropdown-items");
 
