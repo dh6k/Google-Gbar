@@ -31,6 +31,9 @@
         color: #1f1f1f !important;
         background-color: #99c3ff !important; 
     }
+    [theme="2009"] .gbar-spacer::after {
+        color: #fff !important; 
+    }
     [theme="2009"] .gbar-menu-spacer {
         background-color: #99c3ff !important; 
     }
