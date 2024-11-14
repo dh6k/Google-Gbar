@@ -1644,3 +1644,4 @@ loadConfig();
 placeGBar();
 
 GM_registerMenuCommand("Configure Gbar", changeConfig);
+GM_registerMenuCommand("Refresh Gbar", placeGBar);
