@@ -891,7 +891,7 @@ gBarStyle.textContent = `
 }
 
 [theme="2010"] .gbar-menu-item:hover {
-  text-decoration: underline !important;
+  background-color: #e4ebf8;
 }
 
 [theme="2010"] .gbar-menu-spacer {
