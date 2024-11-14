@@ -1344,8 +1344,8 @@ async function loadConfig() {
             case "link": {
               newSubElement = document.createElement("a");
               newSubElement.classList.add("gbar-menu-item");
-              newSubElement.innerHTML = subitem.label;
-              newSubElement.href = subitem.url;
+              newSubElement.innerHTML = parseString(subitem.label);
+              newSubElement.href = parseString(subitem.url);
               break;
             }
             case "spacer": {
