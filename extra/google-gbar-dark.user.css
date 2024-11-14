@@ -78,6 +78,9 @@
     [theme="2010"] .gbar-menu-item {
         color: #5083ff !important;
     }
+    [theme="2010"] .gbar-menu-item:hover {
+        background-color: #0b121f !important;
+    }
     [theme="2010"] .gbar-menu-spacer {
         background-color: #1a1a1a !important;
     }
