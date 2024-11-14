@@ -1353,7 +1353,7 @@ async function loadConfig() {
               break;
             }
             default: {
-              break;
+              return;
             }
           }
 
@@ -1364,7 +1364,7 @@ async function loadConfig() {
         break;
       }
       default: {
-        break;
+        return;
       }
     }
 
