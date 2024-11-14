@@ -149,6 +149,16 @@ const presets = [
       },
       {
         type: "link",
+        label: "*{email}",
+        account: true,
+        url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue={url}",
+      },
+      {
+        type: "spacer",
+        account: true,
+      },
+      {
+        type: "link",
         label: "iGoogle",
         url: "https://web.archive.org/web/2009if_/http://www.google.com/ig",
       },
@@ -162,12 +172,13 @@ const presets = [
       },
       {
         type: "spacer",
+        account: false,
       },
       {
         type: "link",
-        label_default: "Sign in",
-        label: "*{email}",
-        url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue=https://myaccount.google.com",
+        label: "Sign in",
+        account: false,
+        url: "https://accounts.google.com/ServiceLogin?continue={url}",
       },
     ],
   },
@@ -309,9 +320,15 @@ const presets = [
       },
       {
         type: "link",
-        label_default: "<b>Sign in</b>",
         label: "{email}",
-        url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue=https://myaccount.google.com",
+        account: true,
+        url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue={url}",
+      },
+      {
+        type: "link",
+        label: "<b>Sign in</b>",
+        account: false,
+        url: "https://accounts.google.com/ServiceLogin?continue={url}",
       },
       {
         type: "spacer",
@@ -470,9 +487,15 @@ const presets = [
       },
       {
         type: "link",
-        label_default: "<b>Sign in</b>",
         label: "{email}",
-        url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue=https://myaccount.google.com",
+        account: true,
+        url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue={url}",
+      },
+      {
+        type: "link",
+        label: "<b>Sign in</b>",
+        account: false,
+        url: "https://accounts.google.com/ServiceLogin?continue={url}",
       },
       {
         type: "spacer",
@@ -515,9 +538,15 @@ const presets = [
     layout: [
       {
         type: "link",
-        label_default: "Sign in",
-        label: "+{username}",
-        url: "https://accounts.google.com/ServiceLogin?continue=https://myaccount.google.com",
+        label: "+{name}",
+        account: true,
+        url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue={url}",
+      },
+      {
+        type: "link",
+        label: "Sign in",
+        account: false,
+        url: "https://accounts.google.com/ServiceLogin?continue={url}",
       },
       {
         type: "link",
@@ -1070,9 +1099,13 @@ gBar.prepend(gBarStyle);
 if (document.querySelector("[href^='https://accounts.google.com/SignOutOptions']")) {
   const infoElement = document.querySelector("[href^='https://accounts.google.com/SignOutOptions']");
 
-  userInfo = (infoElement.ariaLabel ?? infoElement.title).replace(/\n|\(|\)/g, "").split(" ");
-  userEmail = userInfo[4];
-  userName = userInfo[2];
+  userInfo = (infoElement.ariaLabel ?? infoElement.title).split(" ").slice(2);
+  userInfo.splice(-2, 1);
+  userInfo = userInfo.join(" ").split("\n");
+
+  console.log(userInfo);
+  userEmail = userInfo[1].replace(/\(|\)/g, "");
+  userName = userInfo[0];
   userPicture = infoElement.querySelector("img").src.replace("s32", "s128");
 
   gBar.style.setProperty("--user-picture", `url(${userPicture})`);
@@ -1088,6 +1121,16 @@ if (document.querySelector("[href^='https://accounts.google.com/SignOutOptions']
   gBar.style.setProperty("--user-picture", `url(${userPicture})`);
 
   userInfo = true;
+} else {
+  userInfo = false;
+}
+
+function parseString(string) {
+  if (userInfo) {
+    return string.replaceAll("{email}", userEmail).replaceAll("{name}", userName).replaceAll("{url}", window.location.href).replace("*", "");
+  } else {
+    return string.replaceAll("{email}", "Email").replaceAll("{name}", "Name").replaceAll("{url}", window.location.href).replace("*", "");
+  }
 }
 
 function handleMenuClick(item, e) {
@@ -1252,31 +1295,10 @@ async function loadConfig() {
       case "link": {
         newElement = document.createElement("a");
         newElement.classList.add("gbar-item");
-        newElement.href = item.url;
-        if (item.label_default && userInfo) {
-          if (item.label.startsWith("*")) {
-            newElement.innerHTML = item.label.replaceAll("{email}", userEmail).replaceAll("{username}", userName).replace("*", "");
-            newElement.classList.add("active");
-          } else {
-            newElement.innerHTML = item.label.replaceAll("{email}", userEmail).replaceAll("{username}", userName);
-          }
-        } else if (item.label_default && !userInfo) {
-          if (item.label_default.startsWith("*")) {
-            newElement.innerHTML = item.label_default.replace("*", "");
-            newElement.classList.add("active");
-          } else {
-            newElement.innerHTML = item.label_default;
-          }
-        } else {
-          if (item.label.startsWith("*")) {
-            newElement.innerHTML = item.label.replace("*", "");
-            newElement.classList.add("active");
-          } else {
-            newElement.innerHTML = item.label;
-          }
-        }
+        newElement.innerHTML = parseString(item.label);
+        newElement.href = parseString(item.url);
 
-        if (detectLocation(configJson.layout, configJson.layout.indexOf(item)) == true) {
+        if (detectLocation(configJson.layout, configJson.layout.indexOf(item)) == true || item.label.startsWith("*")) {
           newElement.classList.add("active");
         }
 
@@ -1298,27 +1320,16 @@ async function loadConfig() {
 
         let newElementLink = document.createElement("a");
         newElementLink.classList.add("gbar-item");
-        newElementLink.href = item.url;
-        if (item.icon && gBar.getAttribute("theme") != "2009" && gBar.getAttribute("theme") != "2013") {
+        newElementLink.href = parseString(item.url);
+        if (item.icon && gBar.getAttribute("theme") != ("2009" || "2013")) {
           let newElementIcon = document.createElement("span");
           newElementIcon.classList.add("gbar-item-icon");
           newElementIcon.classList.add(item.icon);
           newElementLink.appendChild(newElementIcon);
         } else {
-          if (item.label_default && userInfo) {
-            if (item.label.includes("{email}")) {
-              newElementLink.innerHTML = item.label.replace("{email}", userEmail);
-            } else if (item.label.includes("{username}")) {
-              newElementLink.innerHTML = item.label.replace("{username}", userName);
-            } else {
-              newElementLink.innerHTML = item.label_default;
-            }
-          } else if (item.label_default && !userInfo) {
-            newElementLink.innerHTML = item.label_default;
-          } else {
-            newElementLink.innerHTML = item.label;
-          }
+          newElementLink.innerHTML = parseString(item.label);
         }
+
         newElement.appendChild(newElementLink);
 
         let newElementMenu = document.createElement("div");
@@ -1358,7 +1369,15 @@ async function loadConfig() {
       }
     }
 
-    gBar.appendChild(newElement);
+    if ("account" in item) {
+      if (item.account == true && userInfo == true) {
+        gBar.appendChild(newElement);
+      } else if (item.account == false && userInfo == false) {
+        gBar.appendChild(newElement);
+      }
+    } else {
+      gBar.appendChild(newElement);
+    }
   });
 
   document.addEventListener("click", (e) => {
