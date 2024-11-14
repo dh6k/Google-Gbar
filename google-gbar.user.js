@@ -167,18 +167,30 @@ const presets = [
       },
       {
         type: "link",
+        label: "My Account",
+        url: "https://myaccount.google.com/",
+        account: true,
+      },
+      {
+        type: "link",
         label: "Search settings",
         url: "https://www.google.com/preferences",
+        account: false,
       },
       {
         type: "spacer",
-        account: false,
       },
       {
         type: "link",
         label: "Sign in",
         account: false,
         url: "https://accounts.google.com/ServiceLogin?continue={url}",
+      },
+      {
+        type: "link",
+        label: "Sign out",
+        account: true,
+        url: "https://accounts.google.com/Logout?continue={url}",
       },
     ],
   },
@@ -486,8 +498,9 @@ const presets = [
         type: "full_spacer",
       },
       {
-        type: "link",
+        type: "account_menu",
         label: "{email}",
+        position: "left",
         account: true,
         url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue={url}",
       },
@@ -695,11 +708,11 @@ gBarStyle.textContent = `
 /* GBar Item Styling */
 #gbar * {
   font-family: Arial, sans-serif !important;
-  font-size: 13px !important;
   outline: none !important;
 }
 #gbar {
   display: flex !important;
+  font-size: 13px;
   flex-direction: row;
   position: relative;
   white-space: nowrap;
@@ -739,6 +752,16 @@ gBarStyle.textContent = `
 }
 .gbar-menu.right {
   left: 0;
+}
+.gbar-account-menu-information,
+.gbar-account-menu-links,
+.gbar-account-menu-buttons {
+  display: flex;
+  flex-direction: row;
+}
+.gbar-account-menu-details {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Era Specific Styling */
@@ -1029,7 +1052,90 @@ gBarStyle.textContent = `
   height: 1px;
   width: 100%;
 }
-
+[theme="2011"] .gbar-account-menu,
+[theme="2013"] .gbar-account-menu {
+  padding: 0px;
+}
+[theme="2011"] .gbar-account-menu-information,
+[theme="2013"] .gbar-account-menu-information {
+  padding: 20px 50px 16px 20px;
+}
+[theme="2011"] .gbar-account-menu-picture,
+[theme="2013"] .gbar-account-menu-picture {
+  height: 54px;
+  margin-right: 15px;
+  border: 1px solid #bebebe;
+}
+[theme="2011"] .gbar-account-menu-name,
+[theme="2013"] .gbar-account-menu-details {
+  color: #000;
+  font-weight: bold;
+}
+[theme="2011"] .gbar-account-menu-email,
+[theme="2013"] .gbar-account-menu-email {
+  color: #666;
+}
+[theme="2011"] .gbar-account-menu-links,
+[theme="2013"] .gbar-account-menu-links {
+  gap: 10px;
+}
+[theme="2011"] .gbar-account-menu-link,
+[theme="2013"] .gbar-account-menu-link {
+  color: #36c !important;
+  text-decoration: none !important;
+  line-height: 28px;
+}
+[theme="2011"] .gbar-account-menu-link:hover,
+[theme="2013"] .gbar-account-menu-link:hover {
+  text-decoration: underline !important;
+}
+[theme="2011"] .gbar-account-menu-separator,
+[theme="2013"] .gbar-account-menu-separator {
+  color: #ccc;
+  line-height: 28px;
+}
+[theme="2011"] .gbar-account-menu-buttons,
+[theme="2013"] .gbar-account-menu-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-top: 1px solid #bebebe;
+  box-shadow: inset 0 12px 4px -10px rgba(0, 0, 0, 0.12);
+  height: 50px;
+  padding: 0 20px;
+}
+[theme="2011"] .gbar-account-menu-button,
+[theme="2013"] .gbar-account-menu-button {
+  text-decoration: none !important;
+  cursor: default;
+  background: linear-gradient(0deg, #fbfbfb 0%, #ffffff 100%);
+  border: 1px solid #dcdcdc;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #444;
+  height: 29px;
+  line-height: 29px;
+  padding: 0 8px;
+}
+[theme="2011"] .gbar-account-menu-button:hover,
+[theme="2013"] .gbar-account-menu-button:hover {
+  color: #222;
+  border: 1px solid #c6c6c6 !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+[theme="2011"] .gbar-account-menu-button:active,
+[theme="2013"] .gbar-account-menu-button:active {
+  color: #222;
+  border: 1px solid #c6c6c6;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+[theme="2011"] .gbar-account-menu-button:focus,
+[theme="2013"] .gbar-account-menu-button:focus {
+  border: 1px solid #4d90fe;
+}
 /* 2013 */
 [theme="2013"] .gbar-item {
   color: #ccc !important;
@@ -1094,6 +1200,7 @@ gBarStyle.textContent = `
   width: 100%;
 }
 `;
+
 gBar.prepend(gBarStyle);
 
 if (document.querySelector("[href^='https://accounts.google.com/SignOutOptions']")) {
@@ -1320,7 +1427,7 @@ async function loadConfig() {
         let newElementLink = document.createElement("a");
         newElementLink.classList.add("gbar-item");
         newElementLink.href = parseString(item.url);
-        if (item.icon && gBar.getAttribute("theme") != ("2009" || "2013")) {
+        if (item.icon && gBar.getAttribute("theme") != "2009" && gBar.getAttribute("theme") != "2013") {
           let newElementIcon = document.createElement("span");
           newElementIcon.classList.add("gbar-item-icon");
           newElementIcon.classList.add(item.icon);
@@ -1359,6 +1466,45 @@ async function loadConfig() {
 
           newElementMenu.appendChild(newSubElement);
         });
+
+        createdMenus.push(newElement);
+        break;
+      }
+      case "account_menu": {
+        newElement = document.createElement("div");
+        newElement.classList.add("gbar-item-dropdown");
+
+        let newElementLink = document.createElement("a");
+        newElementLink.classList.add("gbar-item");
+        newElementLink.href = parseString(item.url);
+        newElementLink.innerHTML = parseString(item.label);
+
+        newElement.appendChild(newElementLink);
+
+        let newElementMenu = document.createElement("div");
+        newElementMenu.classList.add("gbar-menu");
+        newElementMenu.classList.add("gbar-account-menu");
+        newElementMenu.classList.add(item.position);
+        newElement.appendChild(newElementMenu);
+
+        newElementMenu.innerHTML = `
+        <div class="gbar-account-menu-information">
+          <img src="${userPicture}" class="gbar-account-menu-picture">
+          <div class="gbar-account-menu-details">
+            <span class="gbar-account-menu-name">${userName}</span>
+            <span class="gbar-account-menu-email">${userEmail}</span>
+            <div class="gbar-account-menu-links">
+              <a class="gbar-account-menu-link" href="https://myaccount.google.com">Google Account</a>
+              <span class="gbar-account-menu-separator">–</span>
+              <a class="gbar-account-menu-link" href="https://policies.google.com/privacy">Privacy</a>
+            </div>
+          </div>
+        </div>
+        <div class="gbar-account-menu-buttons">
+          <a class="gbar-account-menu-button" href="https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue=${window.location.href}">Add account</a>
+          <a class="gbar-account-menu-button" href="https://accounts.google.com/Logout?continue=${window.location.href}">Sign out</a>
+        </div>
+        `;
 
         createdMenus.push(newElement);
         break;
