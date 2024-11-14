@@ -1103,7 +1103,6 @@ if (document.querySelector("[href^='https://accounts.google.com/SignOutOptions']
   userInfo.splice(-2, 1);
   userInfo = userInfo.join(" ").split("\n");
 
-  console.log(userInfo);
   userEmail = userInfo[1].replace(/\(|\)/g, "");
   userName = userInfo[0];
   userPicture = infoElement.querySelector("img").src.replace("s32", "s128");
