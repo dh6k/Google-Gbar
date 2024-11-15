@@ -331,9 +331,11 @@ const presets = [
         type: "spacer",
       },
       {
-        type: "link",
-        label: "{email}",
+        type: "account_menu",
+        label: "{name}",
+        position: "left",
         account: true,
+        profile_picture: false,
         url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue={url}",
       },
       {
@@ -499,9 +501,10 @@ const presets = [
       },
       {
         type: "account_menu",
-        label: "{email}",
+        label: "{name}",
         position: "left",
         account: true,
+        profile_picture: false,
         url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue={url}",
       },
       {
@@ -753,16 +756,6 @@ gBarStyle.textContent = `
 .gbar-menu.right {
   left: 0;
 }
-.gbar-account-menu-information,
-.gbar-account-menu-links,
-.gbar-account-menu-buttons {
-  display: flex;
-  flex-direction: row;
-}
-.gbar-account-menu-details {
-  display: flex;
-  flex-direction: column;
-}
 
 /* Era Specific Styling */
 
@@ -840,11 +833,18 @@ gBarStyle.textContent = `
   text-decoration: none !important;
   padding: 0.2em 0.5em;
 }
-
 [theme="2009"] .gbar-menu-spacer {
   height: 1px;
   background-color: #c9d7f1;
   margin: 0.2em 0.5em;
+}
+[theme="2009"] .gbar-account-menu-information {
+  display: flex;
+  flex-direction: column;
+}
+[theme="2009"] .gbar-account-menu-email {
+  font-weight: bold;
+  padding: 0.2em 0.5em;
 }
 /* 2010 */
 [theme="2010"]#gbar {
@@ -950,6 +950,44 @@ gBarStyle.textContent = `
   width: 100%;
   height: 1px;
   background-color: #e5e5e5;
+}
+[theme="2010"] .gbar-account-menu-information {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px 6px 10px;
+}
+[theme="2010"] .gbar-account-menu-details {
+  display: flex;
+  flex-direction: column;
+}
+[theme="2010"] .gbar-account-menu-picture {
+  height: 32px;
+  border: 1px solid #e5e5e5;
+  margin-right: 10px;
+}
+[theme="2010"] .gbar-account-menu-name {
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+[theme="2010"] .gbar-account-menu-email {
+  color: #666;
+}
+[theme="2010"] .gbar-account-menu-links {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5px;
+}
+[theme="2010"] .gbar-account-menu-buttons {
+  display: flex;
+  flex-direction: row;
+}
+[theme="2010"] .gbar-account-menu-buttons .gbar-menu-item {
+  height: 26px;
+  flex: 1;
+}
+[theme="2010"] .gbar-account-menu .gbar-menu-item {
+  padding: 0 10px;
 }
 
 /* 2011 */
@@ -1070,7 +1108,18 @@ gBarStyle.textContent = `
 }
 [theme="2011"] .gbar-account-menu-information,
 [theme="2013"] .gbar-account-menu-information {
+  display: flex;
+  flex-direction: row;
+  padding: 15px 90px 10px 20px;
+}
+[theme="2011"] .gbar-account-menu-information:has(.gbar-account-menu-picture),
+[theme="2013"] .gbar-account-menu-information:has(.gbar-account-menu-picture) {
   padding: 20px 50px 16px 20px;
+}
+[theme="2011"] .gbar-account-menu-details,
+[theme="2013"] .gbar-account-menu-details {
+  display: flex;
+  flex-direction: column;
 }
 [theme="2011"] .gbar-account-menu-picture,
 [theme="2013"] .gbar-account-menu-picture {
@@ -1078,17 +1127,21 @@ gBarStyle.textContent = `
   margin-right: 15px;
   border: 1px solid #bebebe;
 }
+[theme="2010"] .gbar-account-menu-name,
 [theme="2011"] .gbar-account-menu-name,
-[theme="2013"] .gbar-account-menu-details {
+[theme="2013"] .gbar-account-menu-name {
   color: #000;
   font-weight: bold;
 }
+[theme="2010"] .gbar-account-menu-email,
 [theme="2011"] .gbar-account-menu-email,
 [theme="2013"] .gbar-account-menu-email {
   color: #666;
 }
 [theme="2011"] .gbar-account-menu-links,
 [theme="2013"] .gbar-account-menu-links {
+  display: flex;
+  flex-direction: row;
   gap: 10px;
 }
 [theme="2011"] .gbar-account-menu-link,
@@ -1519,24 +1572,58 @@ async function loadConfig() {
         newElementMenu.classList.add(item.position);
         newElement.appendChild(newElementMenu);
 
-        newElementMenu.innerHTML = `
-        <div class="gbar-account-menu-information">
-          <img src="${userPicture}" class="gbar-account-menu-picture">
-          <div class="gbar-account-menu-details">
-            <span class="gbar-account-menu-name">${userName}</span>
+        switch (gBar.getAttribute("theme")) {
+          case "2009":
+            newElementMenu.innerHTML = `
+            <div class="gbar-account-menu-information">
             <span class="gbar-account-menu-email">${userEmail}</span>
-            <div class="gbar-account-menu-links">
-              <a class="gbar-account-menu-link" href="https://myaccount.google.com">Google Account</a>
-              <span class="gbar-account-menu-separator">–</span>
-              <a class="gbar-account-menu-link" href="https://policies.google.com/privacy">Privacy</a>
+            <div class="gbar-menu-spacer"></div>
+            <a class="gbar-menu-item" href="https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue=${window.location.href}">Sign in to another account...</a>
+            `;
+            break;
+          case "2010":
+            newElementMenu.innerHTML = `
+            <div class="gbar-account-menu-information">
+              ${item.profile_picture ? `<img src="${userPicture}" class="gbar-account-menu-picture">` : ""}
+              <div class="gbar-account-menu-details">
+                <span class="gbar-account-menu-name">${userName}</span>
+                <span class="gbar-account-menu-email">${userEmail}</span>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="gbar-account-menu-buttons">
-          <a class="gbar-account-menu-button" href="https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue=${window.location.href}">Add account</a>
-          <a class="gbar-account-menu-button" href="https://accounts.google.com/Logout?continue=${window.location.href}">Sign out</a>
-        </div>
-        `;
+            <div class="gbar-account-menu-links">
+              <a class="gbar-menu-item" href="https://myaccount.google.com">View profile</a>
+              <a class="gbar-menu-item" href="https://myaccount.google.com">Account settings</a>
+              <a class="gbar-menu-item" href="https://policies.google.com/privacy">Privacy</a>
+            </div>
+            <div class="gbar-menu-spacer"></div>
+            <div class="gbar-account-menu-buttons">
+              <a class="gbar-menu-item" href="https://accounts.google.com/Logout?continue=${window.location.href}">Sign out</a>
+              <a class="gbar-menu-item" href="https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue=${window.location.href}">Switch account</a>
+            </div>
+            `;
+            break;
+          case "2011":
+          case "2013":
+            newElementMenu.innerHTML = `
+            <div class="gbar-account-menu-information">
+              ${item.profile_picture ? `<img src="${userPicture}" class="gbar-account-menu-picture">` : ""}
+              <div class="gbar-account-menu-details">
+                <span class="gbar-account-menu-name">${userName}</span>
+                <span class="gbar-account-menu-email">${userEmail}</span>
+                <div class="gbar-account-menu-links">
+                  <a class="gbar-account-menu-link" href="https://myaccount.google.com">Google Account</a>
+                  <span class="gbar-account-menu-separator">–</span>
+                  <a class="gbar-account-menu-link" href="https://policies.google.com/privacy">Privacy</a>
+                </div>
+              </div>
+            </div>
+            <div class="gbar-account-menu-buttons">
+              <a class="gbar-account-menu-button" href="https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue=${window.location.href}">Add account</a>
+              <a class="gbar-account-menu-button" href="https://accounts.google.com/Logout?continue=${window.location.href}">Sign out</a>
+            </div>
+            `;
+            break;
+        }
 
         createdMenus.push(newElement);
         break;
