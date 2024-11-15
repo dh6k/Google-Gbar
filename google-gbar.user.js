@@ -1488,7 +1488,15 @@ async function loadConfig() {
             }
           }
 
-          newElementMenu.appendChild(newSubElement);
+          if ("account" in subitem) {
+            if (subitem.account == true && userInfo == true) {
+              newElementMenu.appendChild(newSubElement);
+            } else if (subitem.account == false && userInfo == false) {
+              newElementMenu.appendChild(newSubElement);
+            }
+          } else {
+            newElementMenu.appendChild(newSubElement);
+          }
         });
 
         createdMenus.push(newElement);
