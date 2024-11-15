@@ -1406,6 +1406,9 @@ async function loadConfig() {
 
         if (detectLocation(configJson.layout, configJson.layout.indexOf(item)) == true || item.label.startsWith("*")) {
           newElement.classList.add("active");
+          if (gBar.getAttribute("theme") == "2009") {
+            newElement.removeAttribute("href");
+          }
         }
 
         break;
