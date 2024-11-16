@@ -15,7 +15,7 @@
 // @run-at       document-idle
 // @noframes
 // ==/UserScript==
-let userInfo;
+let userInfo = false;
 let userEmail;
 let userName;
 let userPicture;
@@ -1468,6 +1468,14 @@ async function loadConfig() {
 
   // Add Items
   let createdMenus = [];
+
+  if (configJson.fake_account) {
+    userInfo = true;
+    userEmail = configJson.fake_account.email;
+    userName = configJson.fake_account.username;
+    userPicture = configJson.fake_account.profile_picture;
+  }
+
   configJson.layout.forEach((item) => {
     let newElement;
 
