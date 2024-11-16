@@ -534,7 +534,7 @@ const presets = [
           {
             type: "link",
             label: "iGoogle",
-            url: "https://web.archive.org/web/2010if_/https://www.google.com/ig",
+            url: "https://web.archive.org/web/2011if_/http://www.google.com/ig",
           },
           {
             type: "spacer",
