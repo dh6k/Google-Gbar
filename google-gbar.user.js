@@ -79,6 +79,7 @@ const presets = [
         type: "menu",
         label: "more",
         position: "right",
+        hover: false,
         url: "https://about.google/products/#all-products",
         items: [
           {
@@ -249,6 +250,7 @@ const presets = [
         type: "menu",
         label: "more",
         position: "right",
+        hover: false,
         url: "https://about.google/products/#all-products",
         items: [
           {
@@ -339,6 +341,7 @@ const presets = [
         type: "account_menu",
         label: "{name}",
         position: "left",
+        hover: false,
         account: true,
         profile_picture: false,
         url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue={url}",
@@ -357,6 +360,7 @@ const presets = [
         label: "Settings",
         icon: "settings",
         position: "left",
+        hover: false,
         url: "https://www.google.com/preferences",
         items: [
           {
@@ -379,6 +383,11 @@ const presets = [
   {
     name: "2011",
     theme: "2011",
+    fake_account: {
+      email: "username@exmaple.com",
+      username: "Username",
+      profile_picture: "https://your.url.here",
+    },
     layout: [
       {
         type: "link",
@@ -426,6 +435,7 @@ const presets = [
         type: "menu",
         label: "More",
         position: "right",
+        hover: false,
         url: "https://about.google/products/#all-products",
         items: [
           {
@@ -508,6 +518,7 @@ const presets = [
         type: "account_menu",
         label: "{name}",
         position: "left",
+        hover: false,
         account: true,
         profile_picture: false,
         url: "https://accounts.google.com/ServiceLogin?continue=https://accounts.google.com/SignOutOptions?continue={url}",
@@ -526,6 +537,7 @@ const presets = [
         label: "Settings",
         icon: "settings",
         position: "left",
+        hover: false,
         url: "https://www.google.com/preferences",
         items: [
           {
@@ -621,6 +633,7 @@ const presets = [
         type: "menu",
         label: "More",
         position: "right",
+        hover: false,
         url: "https://about.google/products/#all-products",
         items: [
           {
@@ -1584,7 +1597,16 @@ async function loadConfig() {
           }
         });
 
-        createdMenus.push(newElement);
+        if (item.hover == true) {
+          newElement.addEventListener("mouseenter", function () {
+            newElement.classList.add("active");
+          });
+          newElement.addEventListener("mouseleave", function () {
+            newElement.classList.remove("active");
+          });
+        } else {
+          createdMenus.push(newElement);
+        }
         break;
       }
       case "account_menu": {
@@ -1657,7 +1679,19 @@ async function loadConfig() {
             break;
         }
 
-        createdMenus.push(newElement);
+        if (item.hover == true) {
+          newElement.addEventListener("click", function (event) {
+            event.preventDefault();
+          });
+          newElement.addEventListener("mouseenter", function () {
+            newElement.classList.add("active");
+          });
+          newElement.addEventListener("mouseleave", function () {
+            newElement.classList.remove("active");
+          });
+        } else {
+          createdMenus.push(newElement);
+        }
         break;
       }
       default: {
