@@ -1474,6 +1474,7 @@ async function loadConfig() {
     userEmail = configJson.fake_account.email;
     userName = configJson.fake_account.username;
     userPicture = configJson.fake_account.profile_picture;
+    gBar.style.setProperty("--user-picture", `url(${userPicture})`);
   }
 
   configJson.layout.forEach((item) => {
