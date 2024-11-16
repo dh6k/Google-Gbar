@@ -1490,12 +1490,14 @@ async function loadConfig() {
     userName = configJson.fake_account.name;
     userPicture = configJson.fake_account.profile_picture;
     gBar.style.setProperty("--user-picture", `url(${userPicture})`);
-  } else if (!configJson.fake_account && oldUserInfo == true) {
+  } else if (!configJson.fake_account && oldUserInfo) {
     userInfo = true;
     userEmail = oldUserEmail;
     userName = oldUserName;
     userPicture = oldUserPicture;
     gBar.style.setProperty("--user-picture", `url(${userPicture})`);
+  } else if (!configJson.fake_account && !oldUserInfo) {
+    userInfo = false;
   }
 
   configJson.layout.forEach((item) => {
