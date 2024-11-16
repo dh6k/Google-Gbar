@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @preprocessor   stylus
 @name           Google Gbar Dark
-@namespace      github.com/openstyles/stylus
+@namespace      github.com/callyham/google-gbar
 @version        1.0.0
 @description    Dark mode styles for the gbar
 @author         CallyHam
@@ -48,7 +48,7 @@
     box-shadow: inset 0 2px 0 rgba(80, 131, 255, 0.5) !important;
   }
   [theme="2010"] .gbar-item {
-    color: #5083ff !important;
+    color: #5083ff;
   }
   [theme="2010"] .gbar-item.active {
     color: #fff !important;
@@ -57,11 +57,11 @@
     border-right: 1px solid #000 !important;
   }
   [theme="2010"] .gbar-item-dropdown > .gbar-item::after {
-    border-top: 3px solid #5083ff !important;
+    border-top: 3px solid #5083ff;
   }
   [theme="2010"] .gbar-item:hover::before {
-    border-top: 1px solid rgba(80, 131, 255, 0.1) !important;
-    background: linear-gradient(0deg, rgba(80, 131, 255, 0.2) 0%, rgba(80, 131, 255, 0.15) 25%) !important;
+    border-top: 1px solid rgba(80, 131, 255, 0.1);
+    background: linear-gradient(0deg, rgba(80, 131, 255, 0.2) 0%, rgba(80, 131, 255, 0.15) 25%);
   }
   [theme="2010"] .gbar-spacer {
     background-color: #191919 !important;
@@ -69,9 +69,9 @@
   }
   [theme="2010"] .gbar-item-dropdown.active > .gbar-item {
     background-color: #000 !important;
-    border-top: 1px solid #0a141e !important;
-    border-left: 1px solid #1a2843 !important;
-    border-right: 1px solid #1a2843 !important;
+    border-top: 1px solid #0a141e;
+    border-left: 1px solid #1a2843;
+    border-right: 1px solid #1a2843;
   }
   [theme="2010"] .gbar-menu {
     background-color: #000 !important;

@@ -1,0 +1,97 @@
+/* ==UserStyle==
+@preprocessor   stylus
+@name           Google Gbar Accent Colorizer
+@namespace      github.com/callyham/google-gbar
+@version        1.0.0
+@description    Gives the gbar a custom accent color
+@author         CallyHam
+@var color accent "Accent Color" #36c
+==/UserStyle== */
+
+@-moz-document domain("google.com"), domain("youtube.com") {
+  /* 2009 */
+  [theme="2009"]#gbar {
+    border-bottom: 1px solid mix(accent, transparent, 25%) !important;
+  }
+  [theme="2009"] .gbar-item {
+    color: accent !important;
+  }
+  [theme="2009"] .gbar-menu {
+    border-top: 1px solid mix(accent, transparent, 25%) !important;
+    border-left: 1px solid mix(accent, transparent, 20%) !important;
+    border-right: 1px solid accent !important;
+    border-bottom: 1px solid accent !important;
+  }
+  [theme="2009"] .gbar-menu-item {
+    color: accent !important;
+  }
+  [theme="2009"] .gbar-menu-item:hover {
+    background-color: accent !important;
+  }
+  [theme="2009"] .gbar-menu-spacer {
+    background-color: mix(accent, transparent, 25%) !important;
+  }
+  /* 2010 */
+  [theme="2010"]#gbar {
+    box-shadow: inset 0 2px 0 mix(accent, transparent, 25%) !important;
+  }
+  [theme="2010"] .gbar-item {
+    color: accent;
+  }
+  [theme="2010"] .gbar-item:hover::before {
+    border-top: 1px solid mix(accent, transparent, 5%);
+    background: linear-gradient(0deg, mix(accent, transparent, 12%) 0%, mix(accent, transparent, 8%) 25%);
+  }
+  [theme="2010"] .gbar-item.active {
+    box-shadow: inset 0 3px 0 accent !important;
+  }
+  [theme="2010"] .gbar-item-dropdown.active .gbar-item {
+    border-top: 1px solid mix(accent, transparent, 15%);
+    border-left: 1px solid mix(accent, transparent, 30%);
+    border-right: 1px solid mix(accent, transparent, 30%);
+  }
+  [theme="2010"] .gbar-item-dropdown .gbar-item:after {
+    border-top: 3px solid accent;
+  }
+  [theme="2010"] .gbar-menu {
+    border: 1px solid mix(accent, transparent, 30%) !important;
+  }
+  [theme="2010"] .gbar-menu-item {
+    color: accent !important;
+  }
+  [theme="2010"] .gbar-menu-item:hover {
+    background-color: mix(accent, transparent, 10%) !important;
+  }
+  [theme="2010"] .gbar-item-icon.settings {
+    background: accent !important;
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMCA3QzEwIDguNjU2ODUgOC42NTY4NSAxMCA3IDEwQzUuMzQzMTUgMTAgNCA4LjY1Njg1IDQgN0M0IDUuMzQzMTUgNS4zNDMxNSA0IDcgNEM4LjY1Njg1IDQgMTAgNS4zNDMxNSAxMCA3Wk05LjQwNjI1IDdDOS40MDYyNSA4LjMyODkzIDguMzI4OTMgOS40MDYyNSA3IDkuNDA2MjVDNS42NzEwNiA5LjQwNjI1IDQuNTkzNzUgOC4zMjg5MyA0LjU5Mzc1IDdDNC41OTM3NSA1LjY3MTA2IDUuNjcxMDYgNC41OTM3NSA3IDQuNTkzNzVDOC4zMjg5MyA0LjU5Mzc1IDkuNDA2MjUgNS42NzEwNiA5LjQwNjI1IDdaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTQuODEyNSAzLjA2MjVMNS42ODc1IDIuNjI1VjBIOC4zMTI1VjIuNjI1TDkuMTg3NSAzLjA2MjVMMTAuOTM3NSAxLjMxMjVMMTIuNjg3NSAzLjA2MjVMMTAuOTM3NSA0LjgxMjVMMTEuMzc1IDUuNjg3NUgxNFY4LjMxMjVIMTEuMzc1TDEwLjkzNzUgOS4xODc1TDEyLjY4NzUgMTAuOTM3NUwxMC45Mzc1IDEyLjY4NzVMOS4xODc1IDEwLjkzNzVMOC4zMTI1IDExLjM3NVYxNEg1LjY4NzVWMTEuMzc1TDQuODEyNSAxMC45Mzc1TDMuMDYyNSAxMi42ODc1TDEuMzEyNSAxMC45Mzc1TDMuMDYyNSA5LjE4NzVMMi42MjUgOC4zMTI1SDBWNS42ODc1SDIuNjI1TDMuMDYyNSA0LjgxMjVMMS4zMTI1IDMuMDYyNUwzLjA2MjUgMS4zMTI1TDQuODEyNSAzLjA2MjVaTTcgMTFDOS4yMDkxNCAxMSAxMSA5LjIwOTE0IDExIDdDMTEgNC43OTA4NiA5LjIwOTE0IDMgNyAzQzQuNzkwODYgMyAzIDQuNzkwODYgMyA3QzMgOS4yMDkxNCA0Ljc5MDg2IDExIDcgMTFaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTExIDdDMTEgOS4yMDkxNCA5LjIwOTE0IDExIDcgMTFDNC43OTA4NiAxMSAzIDkuMjA5MTQgMyA3QzMgNC43OTA4NiA0Ljc5MDg2IDMgNyAzQzkuMjA5MTQgMyAxMSA0Ljc5MDg2IDExIDdaTTcgMTBDOC42NTY4NSAxMCAxMCA4LjY1Njg1IDEwIDdDMTAgNS4zNDMxNSA4LjY1Njg1IDQgNyA0QzUuMzQzMTUgNCA0IDUuMzQzMTUgNCA3QzQgOC42NTY4NSA1LjM0MzE1IDEwIDcgMTBaIiBmaWxsPSJibGFjayIgZmlsbC1vcGFjaXR5PSIwLjUiLz4KPC9zdmc+Cg");
+    mask-repeat: no-repeat;
+    mask-size: contain;
+  }
+  /* 2011 */
+  [theme="2011"] .gbar-item.active {
+    box-shadow: inset 0 2px 0 accent !important;
+  }
+  [theme="2011"] .gbar-item-dropdown.active .gbar-item-icon.settings {
+    background: accent !important;
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik02LjUgM0w1LjUgMy41TDMuNSAxLjVMMS41IDMuNUwzLjUgNS41TDMgNi41SDBWOS41SDNMMy41IDEwLjVMMS41IDEyLjVMMy41IDE0LjVMNS41IDEyLjVMNi41IDEzVjE2SDkuNVYxM0wxMC41IDEyLjVMMTIuNSAxNC41TDE0LjUgMTIuNUwxMi41IDEwLjVMMTMgOS41SDE2VjYuNUgxM0wxMi41IDUuNUwxNC41IDMuNUwxMi41IDEuNUwxMC41IDMuNUw5LjUgM1YwSDYuNVYzWk04IDEwLjc1QzkuNTE4NzggMTAuNzUgMTAuNzUgOS41MTg3OCAxMC43NSA4QzEwLjc1IDYuNDgxMjIgOS41MTg3OCA1LjI1IDggNS4yNUM2LjQ4MTIyIDUuMjUgNS4yNSA2LjQ4MTIyIDUuMjUgOEM1LjI1IDkuNTE4NzggNi40ODEyMiAxMC43NSA4IDEwLjc1WiIgZmlsbD0iYmxhY2siLz4KPC9zdmc+Cg");
+    mask-repeat: no-repeat;
+    mask-size: contain;
+  }
+  [theme="2011"] .gbar-item-dropdown.active > .gbar-item {
+    color: accent !important;
+  }
+  [theme="2011"] .gbar-item-dropdown.active > .gbar-item:after {
+    border-top: 3px solid accent !important;
+  }
+  [theme="2011"] .gbar-menu-item {
+    color: accent !important;
+  }
+  [theme="2011"] .gbar-menu-item:hover {
+    background-color: mix(accent, transparent, 10%) !important;
+  }
+  [theme="2011"] .gbar-account-menu-link,
+  [theme="2013"] .gbar-account-menu-link {
+    color: accent !important;
+  }
+}
