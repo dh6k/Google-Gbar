@@ -20,6 +20,11 @@ let userEmail;
 let userName;
 let userPicture;
 
+let oldUserInfo = false;
+let oldUserEmail;
+let oldUserName;
+let oldUserPicture;
+
 let settingsOpen = false;
 
 // Define Presets
@@ -1285,8 +1290,13 @@ if (document.querySelector("[href^='https://accounts.google.com/SignOutOptions']
   userName = userInfo[0];
   userPicture = infoElement.querySelector("img").src.replace("s32", "s128");
 
+  oldUserEmail = userInfo[1].replace(/\(|\)/g, "");
+  oldUserName = userInfo[0];
+  oldUserPicture = infoElement.querySelector("img").src.replace("s32", "s128");
+
   gBar.style.setProperty("--user-picture", `url(${userPicture})`);
 
+  oldUserInfo = true;
   userInfo = true;
 } else if (document.getElementById("masthead-expanded-menu-account-container")) {
   const infoElement = document.getElementById("masthead-expanded-menu-account-container");
@@ -1295,8 +1305,13 @@ if (document.querySelector("[href^='https://accounts.google.com/SignOutOptions']
   userName = infoElement.querySelector("#masthead-expanded-menu-account-info > p").textContent;
   userPicture = infoElement.querySelector("img#masthead-expanded-menu-gaia-photo").src;
 
+  oldUserEmail = infoElement.querySelector("#masthead-expanded-menu-email").textContent;
+  oldUserName = infoElement.querySelector("#masthead-expanded-menu-account-info > p").textContent;
+  oldUserPicture = infoElement.querySelector("img#masthead-expanded-menu-gaia-photo").src;
+
   gBar.style.setProperty("--user-picture", `url(${userPicture})`);
 
+  oldUserInfo = true;
   userInfo = true;
 } else {
   userInfo = false;
@@ -1474,6 +1489,12 @@ async function loadConfig() {
     userEmail = configJson.fake_account.email;
     userName = configJson.fake_account.name;
     userPicture = configJson.fake_account.profile_picture;
+    gBar.style.setProperty("--user-picture", `url(${userPicture})`);
+  } else if (!configJson.fake_account && oldUserInfo == true) {
+    userInfo = true;
+    userEmail = oldUserEmail;
+    userName = oldUserName;
+    userPicture = oldUserPicture;
     gBar.style.setProperty("--user-picture", `url(${userPicture})`);
   }
 
