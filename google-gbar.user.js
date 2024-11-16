@@ -383,11 +383,6 @@ const presets = [
   {
     name: "2011",
     theme: "2011",
-    fake_account: {
-      email: "username@exmaple.com",
-      username: "Username",
-      profile_picture: "https://your.url.here",
-    },
     layout: [
       {
         type: "link",
@@ -1410,6 +1405,7 @@ async function loadPresets(dropdownElement, codeElement) {
               dropdownElement.querySelector(".gbar-config-dropdown-spacer:not(#default)").remove();
             }
             await GM.setValue("custom-presets", customPresets);
+            loadPresets();
           });
           dropdownElement.appendChild(deleteElement);
         }
