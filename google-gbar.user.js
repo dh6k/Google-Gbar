@@ -1472,7 +1472,7 @@ async function loadConfig() {
   if (configJson.fake_account) {
     userInfo = true;
     userEmail = configJson.fake_account.email;
-    userName = configJson.fake_account.username;
+    userName = configJson.fake_account.name;
     userPicture = configJson.fake_account.profile_picture;
     gBar.style.setProperty("--user-picture", `url(${userPicture})`);
   }
