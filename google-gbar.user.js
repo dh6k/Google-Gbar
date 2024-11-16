@@ -44,7 +44,7 @@ const presets = [
         type: "link",
         label: "Videos",
         url: "https://www.google.com/videohp",
-        regex: ["^https://www.google.com/videohp.*$", "^https://www.google.com/search.*(?:\\?|\\&)tbm=vid.*$"],
+        regex: ["^https://www.google.com/videohp.*$", "^https://www.google.com/search.*(?:(?:\\?|\\&)udm=7|(?:\\?|\\&)tbm=vid).*$"],
       },
       {
         type: "link",
@@ -214,7 +214,7 @@ const presets = [
         type: "link",
         label: "Videos",
         url: "https://www.google.com/videohp",
-        regex: ["^https://www.google.com/videohp.*$", "^https://www.google.com/search.*(?:\\?|\\&)tbm=vid.*$"],
+        regex: ["^https://www.google.com/videohp.*$", "^https://www.google.com/search.*(?:(?:\\?|\\&)udm=7|(?:\\?|\\&)tbm=vid).*$"],
       },
       {
         type: "link",
@@ -391,7 +391,7 @@ const presets = [
         type: "link",
         label: "Videos",
         url: "https://www.google.com/videohp",
-        regex: ["^https://www.google.com/videohp.*$", "^https://www.google.com/search.*(?:\\?|\\&)tbm=vid.*$"],
+        regex: ["^https://www.google.com/videohp.*$", "^https://www.google.com/search.*(?:(?:\\?|\\&)udm=7|(?:\\?|\\&)tbm=vid).*$"],
       },
       {
         type: "link",
