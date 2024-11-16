@@ -1405,7 +1405,7 @@ async function loadPresets(dropdownElement, codeElement) {
               dropdownElement.querySelector(".gbar-config-dropdown-spacer:not(#default)").remove();
             }
             await GM.setValue("custom-presets", customPresets);
-            loadPresets();
+            loadPresets(dropdownElement, codeElement);
           });
           dropdownElement.appendChild(deleteElement);
         }
