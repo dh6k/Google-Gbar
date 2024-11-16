@@ -187,7 +187,7 @@
     color: #fff !important;
   }
   [theme="2013"] .gbar-item-dropdown.active > .gbar-item::after {
-    border-top: 3px solid #fff;
+    border-top: 3px solid #fff !important;
   }
   [theme="2013"] .gbar-menu-item {
     color: #fff !important;
@@ -200,7 +200,7 @@
       color: #fff !important;
     }
     [theme="2011"] .gbar-item-dropdown.active > .gbar-item::after {
-      border-top: 3px solid #fff;
+      border-top: 3px solid #fff !important;
     }
     [theme="2011"] .gbar-menu-item {
       color: #fff !important;

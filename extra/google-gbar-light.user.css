@@ -34,14 +34,14 @@
   }
   [theme="2011"] .gbar-item-dropdown > .gbar-item:after,
   [theme="2013"] .gbar-item-dropdown > .gbar-item:after {
-    border-top: 3px solid #666666 !important;
+    border-top: 3px solid #666666;
   }
   [theme="2011"] .gbar-item-dropdown.active > .gbar-item:after {
-    border-top: 3px solid #36c !important;
+    border-top: 3px solid #36c;
   }
   [theme="2013"] .gbar-item-dropdown.active > .gbar-item:after,
   [theme="2013"] .gbar-item-dropdown > .gbar-item:hover:after {
-    border-top: 3px solid #000 !important;
+    border-top: 3px solid #000;
   }
   [theme="2011"] .gbar-item-icon.settings,
   [theme="2013"] .gbar-item-icon.settings {
@@ -64,7 +64,7 @@
       color: #000 !important;
     }
     [theme="2011"] .gbar-item-dropdown.active > .gbar-item::after {
-      border-top: 3px solid #000 !important;
+      border-top: 3px solid #000;
     }
     [theme="2011"] .gbar-menu-item {
       color: #000 !important;
