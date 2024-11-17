@@ -1157,8 +1157,7 @@ gBarStyle.textContent = `
   flex-direction: row;
   gap: 10px;
 }
-[theme="2011"] .gbar-account-menu-link,
-[theme="2013"] .gbar-account-menu-link {
+[theme="2011"] .gbar-account-menu-link {
   color: #36c !important;
   text-decoration: none !important;
   line-height: 28px;
@@ -1282,6 +1281,15 @@ gBarStyle.textContent = `
   margin: 10px 0;
   height: 1px;
   width: 100%;
+}
+[theme="2013"] .gbar-account-menu-email {
+  font-weight: bold !important;
+}
+[theme="2013"] .gbar-account-menu-link {
+  color: #000;
+  font-weight: bold !important;
+  text-decoration: none !important;
+  line-height: 28px;
 }
 `;
 
