@@ -997,7 +997,6 @@ gBarStyle.textContent = `
 }
 [theme="2010"] .gbar-account-menu-buttons .gbar-menu-item {
   height: 26px;
-  flex: 1;
 }
 [theme="2010"] .gbar-account-menu .gbar-menu-item {
   padding: 0 10px;
