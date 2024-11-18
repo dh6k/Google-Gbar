@@ -90,7 +90,12 @@
   [theme="2011"] .gbar-menu-item:hover {
     background-color: mix(accent, transparent, 10%) !important;
   }
-  [theme="2011"] .gbar-account-menu-link {
+  [theme="2011"] .gbar-account-menu-link,
+  [theme="2013"] .gbar-account-menu-link {
     color: accent !important;
+  }
+  [theme="2011"] .gbar-account-menu-button:focus,
+  [theme="2013"] .gbar-account-menu-button:focus {
+    border: 1px solid accent;
   }
 }
