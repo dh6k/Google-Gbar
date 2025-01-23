@@ -2,7 +2,7 @@
 @preprocessor   stylus
 @name           Remove Extra Google Elements
 @namespace      github.com/callyham/google-gbar
-@version        1.0.0
+@version        1.0.1
 @description    Removes elements from google that are already present in some form on the gbar.
 @author         CallyHam
 ==/UserStyle== */
@@ -19,6 +19,7 @@
     }
     
     /* Actual Google (Will probably break at some point) */
+    .Ne6nSd,
     .Q3DXx:not(.NDnoQ) {
         display: none !important;
     }
