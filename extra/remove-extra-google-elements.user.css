@@ -1,0 +1,25 @@
+/* ==UserStyle==
+@preprocessor   stylus
+@name           Remove Extra Google Elements
+@namespace      github.com/callyham/google-gbar
+@version        1.0.0
+@description    Removes elements from google that are already present in some form on the gbar.
+@author         CallyHam
+==/UserStyle== */
+
+@-moz-document domain("google.com") {
+    /* Gplex */
+    #ugf-account-button,
+    #ugf-homepage-links,
+    #ugf-apps,
+    #ugf-navbar-right,
+    #ugf-settings-tab,
+    .ugf-plus-buttons {
+        display: none !important;
+    }
+    
+    /* Actual Google (Will probably break at some point) */
+    .Q3DXx:not(.NDnoQ) {
+        display: none !important;
+    }
+}
