@@ -2,7 +2,7 @@
 
 A highly customizable recreation of the gbar in userscript form.
 
-## Installation
+## Usage Instructions
 * Install the [Tampermonkey](https://www.tampermonkey.net/) extension for your browser.
 * Install [google-gbar.user.js](https://github.com/CallyHam/Google-Gbar/raw/main/google-gbar.user.js) using Tampermonkey.
 * Navigate to any google site to verify everything works!
