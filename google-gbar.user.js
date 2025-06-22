@@ -5,7 +5,7 @@
 // @description  A highly customizable recreation of the gbar.
 // @author       CallyHam
 // @match        *://www.google.com/*
-// @match        *://*.youtube.com/*
+// @exclude      *://*.youtube.com/*
 // @exclude      *://www.google.com/maps/
 // @exclude      *://accounts.google.com/*
 // @exclude      *://myaccount.google.com/*
